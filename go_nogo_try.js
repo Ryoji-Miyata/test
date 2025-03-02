@@ -2506,8 +2506,44 @@ async function quitPsychoJS(message, isCompleted) {
   if (psychoJS.experiment.isEntryEmpty()) {
     psychoJS.experiment.nextEntry();
   }
+
+  // データを送信する部分を追加
+  const csvData = psychoJS.experiment.getDataFile();  // PsychoPyで出力されたCSVデータを取得
+  const participantId = psychoJS.experiment.data["participant_id"] || "no_id";
+  const timing = psychoJS.experiment.data["selected_timing_value"] || "no_timing";
+  
+  const now = new Date();
+  const timestamp = `${now.getFullYear()}_${(now.getMonth() + 1).toString().padStart(2, '0')}_${now.getDate().toString().padStart(2, '0')}_${now.getHours().toString().padStart(2, '0')}_${now.getMinutes().toString().padStart(2, '0')}_${now.getSeconds().toString().padStart(2, '0')}`;
+  const filename = `flanker1_${participantId}_${timing}_${timestamp}.csv`;
+
+  // データをOSFに送信
+  fetch("https://pipe.jspsych.org/api/data/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "*/*",
+    },
+    body: JSON.stringify({
+      experimentID: "nTfNs3BeCPOK", // 実験ID
+      filename: filename,
+      data: csvData
+    }),
+  })
+  .then(response => {
+    if (response.ok) {
+      console.log(`データが正常に保存されました。ファイル名: ${filename}`);
+    } else {
+      console.error('データの保存中にエラーが発生しました');
+    }
+  })
+  .catch(error => {
+    console.error('通信エラーが発生しました:', error);
+  });
+
+  // 実験終了処理
   psychoJS.window.close();
   psychoJS.quit({message: message, isCompleted: isCompleted});
   
   return Scheduler.Event.QUIT;
 }
+

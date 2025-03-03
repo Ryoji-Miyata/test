@@ -125,17 +125,17 @@ flowScheduler.add(quitPsychoJS, 'Thank you for your patience.', true);
 // quit if user presses Cancel in dialog box:
 dialogCancelScheduler.add(quitPsychoJS, 'Thank you for your patience.', false);
 
-psychoJS.start({
-  expName: expName,
-  expInfo: expInfo,
-  resources: [
-   // resources:
-{'name': 'gonogopractice1.csv', 'path': 'Ryoji-Miyata/test/gonogopractice1.csv'},
-{'name': 'gonogopractice2.csv', 'path': 'Ryoji-Miyata/test/gonogopractice2.csv'},
-{'name': 'gonogotriallist.csv', 'path': 'Ryoji-Miyata/test/gonogotriallist.csv'},
-{'name': 'gonogotriallist.csv', 'path': 'Ryoji-Miyata/test/gonogotriallist.csv'},
-]
-});
+function startExperiment() {
+    psychoJS.start({
+        expName: expName,
+        expInfo: expInfo,
+        resources: [
+            {'name': 'gonogopractice1.csv', 'path': 'gonogopractice1.csv'},
+            {'name': 'gonogopractice2.csv', 'path': 'gonogopractice2.csv'},
+            {'name': 'gonogotriallist.csv', 'path': 'gonogotriallist.csv'}
+        ]
+    });
+}
 
 psychoJS.experimentLogger.setLevel(core.Logger.ServerLevel.INFO);
 

@@ -15,12 +15,17 @@
   <!-- go_nogo_try.js を読み込む -->
   <script src="go_nogo_try.js" defer></script>
 
-  <script>
-    // 実験開始ボタンがクリックされたときに実験を開始
-    document.getElementById("startButton").addEventListener("click", function() {
-      // go_nogo_try.js の startExperiment 関数を呼び出す
+ <script>
+  document.getElementById("startButton").addEventListener("click", function() {
+    console.log("ボタンがクリックされました。");
+    if (typeof startExperiment !== "undefined") {
+      console.log("startExperiment 関数が見つかりました。");
       startExperiment();
-    });
-  </script>
+    } else {
+      console.error("startExperiment 関数が見つかりません。");
+    }
+  });
+</script>
+
 </body>
 </html>

@@ -13,19 +13,22 @@
   <button id="startButton">実験を開始</button>
 
   <!-- go_nogo_try.js を読み込む -->
-  <script src="go_nogo_try.js" defer></script>
+  <script src="go_nogo_try.js"></script>
 
- <script>
-  document.getElementById("startButton").addEventListener("click", function() {
-    console.log("ボタンがクリックされました。");
-    if (typeof startExperiment !== "undefined") {
-      console.log("startExperiment 関数が見つかりました。");
-      startExperiment();
-    } else {
-      console.error("startExperiment 関数が見つかりません。");
-    }
-  });
-</script>
+  <script>
+    // コンソールで関数の存在を確認
+    console.log(typeof startExperiment);
 
+    // 実験開始ボタンがクリックされたときに実験を開始
+    document.getElementById("startButton").addEventListener("click", function() {
+      console.log("ボタンがクリックされました。");
+      if (typeof startExperiment !== "undefined") {
+        console.log("startExperiment 関数が見つかりました。");
+        startExperiment();
+      } else {
+        console.error("startExperiment 関数が見つかりません。");
+      }
+    });
+  </script>
 </body>
 </html>

@@ -125,7 +125,8 @@ flowScheduler.add(quitPsychoJS, 'Thank you for your patience.', true);
 // quit if user presses Cancel in dialog box:
 dialogCancelScheduler.add(quitPsychoJS, 'Thank you for your patience.', false);
 
-function startExperiment() {
+// go_nogo_try.js ファイル内
+window.startExperiment = function() {
     psychoJS.start({
         expName: expName,
         expInfo: expInfo,
@@ -135,7 +136,7 @@ function startExperiment() {
             {'name': 'gonogotriallist.csv', 'path': 'gonogotriallist.csv'}
         ]
     });
-}
+};
 
 psychoJS.experimentLogger.setLevel(core.Logger.ServerLevel.INFO);
 
